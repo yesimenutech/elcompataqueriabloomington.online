@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Compa Taquería - Fiesta Mexicana</title>
+    <meta name="description" content="Authentic Mexican Food in Bloomington, IN.">
+    <link rel="icon" id="favicon" type="image/png" href="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1789414260/ElCompaTaqueriaLOGO_zjjx1i.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #FF1493; /* Rosa Mexicano */
+            --color-secondary: #FF8C00; /* Naranja Cempasúchil */
+            --color-accent: #00BFFF; /* Azul Claro */
+            --color-yellow: #FFD700;
+            --color-green: #32CD32;
+            --color-text-dark: #2A2118;
+            --color-text-light: #5A4E45;
+            --color-white: #ffffff;
+            --color-background: #FFF9F2;
+            --color-footer: #1A1410;
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-background);
+            /* Patrón sutil de fondo */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff1493' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Sarape Border (Toque Fiesta Mexicana) */
+        .sarape-border {
+            height: 8px;
+            width: 100%;
+            background: linear-gradient(90deg, 
+                var(--color-green) 0%, var(--color-green) 16.6%, 
+                var(--color-white) 16.6%, var(--color-white) 33.2%, 
+                #ce1126 33.2%, #ce1126 49.8%, 
+                var(--color-yellow) 49.8%, var(--color-yellow) 66.4%, 
+                var(--color-primary) 66.4%, var(--color-primary) 83%, 
+                var(--color-accent) 83%, var(--color-accent) 100%);
+        }
+
+        /* Papel Picado Decoración */
+        .papel-picado {
+            width: 100%;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath fill='%23FF1493' d='M0,0 L20,40 L40,0 L60,40 L80,0 L100,40 L100,0 Z'/%3E%3Ccircle cx='10' cy='15' r='3' fill='white'/%3E%3Ccircle cx='30' cy='15' r='3' fill='white'/%3E%3Ccircle cx='50' cy='15' r='3' fill='white'/%3E%3Ccircle cx='70' cy='15' r='3' fill='white'/%3E%3Ccircle cx='90' cy='15' r='3' fill='white'/%3E%3C/svg%3E");
+            background-size: 100px 40px;
+            background-repeat: repeat-x;
+            margin-top: -1px;
+        }
+        
+        .papel-picado.orange {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath fill='%23FF8C00' d='M0,0 L20,40 L40,0 L60,40 L80,0 L100,40 L100,0 Z'/%3E%3Ccircle cx='10' cy='15' r='3' fill='white'/%3E%3Ccircle cx='30' cy='15' r='3' fill='white'/%3E%3Ccircle cx='50' cy='15' r='3' fill='white'/%3E%3Ccircle cx='70' cy='15' r='3' fill='white'/%3E%3Ccircle cx='90' cy='15' r='3' fill='white'/%3E%3C/svg%3E");
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--color-text-dark);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            text-shadow: 2px 2px 0px var(--color-yellow);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--color-text-dark);
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; left: 0;
+            width: 0%; height: 3px;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover { color: var(--color-primary); }
+        .nav-link:hover::after { width: 100%; }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-background);
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 2px solid var(--color-secondary);
+        }
+
+        .lang-btn {
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 900;
+            color: #A09385;
+            transition: color 0.2s;
+        }
+        
+        .lang-btn.active { color: var(--color-primary); }
+
+        .navbar-toggler {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .toggler-icon {
+            width: 30px; height: 4px;
+            background-color: var(--color-primary);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_1600/v1789414792/IMG-20260907-WA0052_kiaxwm.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-top: 66px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .hero-logo {
+            max-height: 320px;
+            width: auto;
+            display: block;
+            margin: 0 auto 40px auto;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+            animation: pulse-logo 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-logo {
+            0% { transform: scale(1) rotate(-2deg); }
+            50% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1) rotate(-2deg); }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 45px;
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border: 4px solid var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-secondary);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(255, 20, 147, 0.5);
+            border-color: var(--color-yellow);
+        }
+
+        /* Sections */
+        .section-padding { padding: 90px 0; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-subtitle {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            letter-spacing: 3px;
+            display: inline-block;
+            margin-bottom: 15px;
+            background: var(--color-yellow);
+            padding: 5px 15px;
+            border-radius: 20px;
+            transform: rotate(-2deg);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 52px;
+            font-weight: 900;
+            color: var(--color-text-dark);
+            line-height: 1.1;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+        }
+
+        .section-divider {
+            width: 100px; height: 8px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-yellow));
+            margin: 25px auto 0 auto;
+            border-radius: 4px;
+        }
+
+        /* About Section */
+        .about-section { background-color: var(--color-white); position: relative; }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 19px;
+            color: var(--color-text-light);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border: 4px solid var(--color-white);
+        }
+        
+        .about-image:nth-child(2) {
+            transform: translateY(40px);
+            border-color: var(--color-yellow);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background-color: var(--color-background);
+        }
+
+        #gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-radius 0.4s ease;
+            border: 3px solid transparent;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: var(--color-primary);
+            border-radius: 30px 10px 30px 10px;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Info Section */
+        .info-section {
+            background-color: var(--color-white);
+            position: relative;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .info-card {
+            background: var(--color-background);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border-bottom: 6px solid var(--color-secondary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        }
+
+        .info-card:hover { transform: translateY(-15px); }
+
+        .info-icon {
+            width: 70px; height: 70px;
+            background: var(--color-yellow);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px auto;
+            color: var(--color-text-dark);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .info-card h4 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-footer);
+            padding: 80px 0 30px 0;
+            color: #F0E6D8;
+            position: relative;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--color-white);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-title {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--color-yellow);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #CBB9A8;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .social-links {
+            display: flex; gap: 15px; margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex; align-items: center; justify-content: center;
+            width: 50px; height: 50px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            color: var(--color-white);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .social-links a:hover {
+            background: var(--color-primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 20, 147, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px dashed rgba(255,255,255,0.1);
+            font-size: 15px;
+            color: #8C7B6B;
+        }
+        
+        .footer-bottom a {
+            color: var(--color-primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        @media (max-width: 992px) {
+            .about-grid, .info-grid { grid-template-columns: 1fr; }
+            .about-image:nth-child(2) { transform: translateY(0); }
+            .section-title { font-size: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-toggler { display: flex; }
+            .nav-menu {
+                position: absolute; top: 100%; left: 0; right: 0;
+                flex-direction: column;
+                background-color: var(--color-white);
+                padding: 30px 20px;
+                box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+                transform: translateY(-100%);
+                opacity: 0; visibility: hidden;
+                border-top: 4px solid var(--color-primary);
+            }
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1; visibility: visible;
+            }
+            .hero-logo { max-height: 220px; }
+            .papel-picado { background-size: 60px 24px; height: 24px; }
+        }
+    </style>
+    
+    <script>
+        window.MENU_TECH_STATE = {
+            "lang": "es",
+            "showReservations": false,
+            "showAbout": true,
+            "showPromo": false,
+            "showGallery": true,
+            "showCatering": false,
+            "showInfo": true,
+            "showDelivery": false,
+            "title": "El Compa Taquería",
+            "logoImg": "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414260/ElCompaTaqueriaLOGO_zjjx1i.png",
+            "aboutImg1": "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414763/IMG-20260901-WA0160_wiwvmd.jpg",
+            "aboutImg2": "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414768/IMG-20260901-WA0145_sqy987.jpg",
+            "gallery": [
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414811/SALSAS_vqn4qr.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414812/QUESADILLA_ot4qvx.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414813/IMG-20260901-WA0179_sbaahr.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414813/IMG-20260901-WA0160_f4ruac.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414814/IMG-20260901-WA0158_hcn3py.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414816/IMG-20260901-WA0147_mpsvrh.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414817/IMG-20260901-WA0139_ohrklu.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414818/IMG-20260901-WA0145_h1gytv.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414819/IMG-20260901-WA0146_prc2ys.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414820/IMG-20260901-WA0136_ltjfga.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414821/IMG-20260901-WA0135_so0h4t.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414822/IMG-20260901-WA0134_zpmr2m.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414823/IMG-20260901-WA0131_f0mbic.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414823/BURRITOS_Y_BOWLS_ve2dud.jpg",
+                "https://res.cloudinary.com/dzklt0a5u/image/upload/v1789414824/BREAKFAST_BURRITO_if2uzr.jpg"
+            ],
+            "info": {
+                "phone": "812-300-1007",
+                "address": "4723 IN-46, Bloomington, IN 47404, United States",
+                "hours": "Monday - Sunday: 9AM - 8PM"
+            },
+            "socials": [
+                {"platform":"facebook","url":"https://www.facebook.com/profile.php?id=61577262801965&sk=photos&locale=es_LA"},
+                {"platform":"instagram","url":"https://www.instagram.com/elcompataqueria.bloomington/"},
+                {"platform":"tiktok","url":"https://www.tiktok.com/@el.compa.taqueria"}
+            ],
+            "paragraphs": {
+                "about": "En El Compa Taquería, nos enorgullece llevar a nuestros invitados auténtica y vibrante cocina mexicana, elaborada con cuidado y rica tradición culinaria. Cada plato está lleno de sabores audaces para brindarte una experiencia memorable.\n\nEl secreto de nuestro éxito es simple: comidas excepcionales con ingredientes frescos y de alta calidad que capturan la verdadera esencia de México.\n\nEn El Compa no solo servimos comida, servimos México en cada mordida. ¡Gracias por tu preferencia!"
+            },
+            "paragraphs_en": {
+                "about": "At El Compa Taquería, we take pride in bringing our guests vibrant and authentic Mexican cuisine, crafted with care and rich culinary tradition. Every dish we serve is full of bold flavors to deliver a memorable dining experience.\n\nThe secret to our success is simple: exceptional meals using fresh, high-quality ingredients that capture the true essence of Mexico.\n\nAt El Compa we don't just serve food, we serve Mexico in every bite. Thank you for your preference!"
+            },
+            "titles": {
+                "about-title": "Somos El Compa",
+                "about-subtitle": "Nuestra Historia",
+                "gallery-title": "Sabor Auténtico",
+                "gallery-subtitle": "Menú Visual",
+                "info-title": "Encuéntranos",
+                "info-subtitle": "Ubicación"
+            },
+            "titles_en": {
+                "about-title": "We are El Compa",
+                "about-subtitle": "Our Story",
+                "gallery-title": "Authentic Flavor",
+                "gallery-subtitle": "Visual Menu",
+                "info-title": "Find Us",
+                "info-subtitle": "Location"
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="sarape-border" style="position: absolute; top: 0; left: 0;"></div>
+        <div class="container nav-container" style="margin-top: 8px;">
+            <a href="#" class="navbar-brand" id="nav-brand">El Compa</a>
+            <button class="navbar-toggler" id="navbar-toggler" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#" class="nav-link" data-es="Inicio" data-en="Home">Inicio</a></li>
+                <li><a href="#about-section" class="nav-link" data-es="Nosotros" data-en="About Us">Nosotros</a></li>
+                <li><a href="#gallery-section" class="nav-link" data-es="Galería" data-en="Gallery">Galería</a></li>
+                <li><a href="#info-section" class="nav-link" data-es="Contacto" data-en="Contact">Contacto</a></li>
+                <li class="lang-switch">
+                    <span id="lang-es" class="lang-btn active">ES</span>
+                    <span style="color: #FF8C00;">|</span>
+                    <span id="lang-en" class="lang-btn">EN</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_500/v1789414260/ElCompaTaqueriaLOGO_zjjx1i.png" id="hero-logo" alt="El Compa Taquería Logo" class="hero-logo">
+            <div class="hero-buttons">
+                <a href="https://elcompataqueriabloomington.onlineordering.io/en?locationId=1563869&orderMode=in_store_pickup" target="_blank" class="btn btn-primary" data-es="Ordenar en Línea" data-en="Order Online">
+                    Ordenar en Línea
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Papel Picado Decor -->
+    <div class="papel-picado"></div>
+
+    <!-- About Us Section -->
+    <section class="section-padding about-section" id="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="section-subtitle" id="about-subtitle" data-es="Nuestra Historia" data-en="Our Story">Nuestra Historia</span>
+                    <h2 class="section-title" id="about-title" data-es="Somos El Compa" data-en="We are El Compa">Somos El Compa</h2>
+                    <div class="section-divider" style="margin-left: 0;"></div>
+                    <br>
+                    <p id="about-p1"></p>
+                    <p id="about-p2"></p>
+                    <p id="about-p3"></p>
+                </div>
+                <div class="about-images">
+                    <img id="about-img-1" src="" alt="Mexican Food" class="about-image" loading="lazy">
+                    <img id="about-img-2" src="" alt="Mexican Food Details" class="about-image" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="papel-picado orange"></div>
+
+    <!-- Gallery Section -->
+    <section class="section-padding gallery-section" id="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" id="gallery-subtitle" data-es="Menú Visual" data-en="Visual Menu">Menú Visual</span>
+                <h2 class="section-title" id="gallery-title" data-es="Sabor Auténtico" data-en="Authentic Flavor">Sabor Auténtico</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div id="gallery-container"></div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="section-padding info-section" id="info-section">
+        <div class="sarape-border" style="position: absolute; top: 0; left: 0;"></div>
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" id="info-subtitle" data-es="Ubicación" data-en="Location">Ubicación</span>
+                <h2 class="section-title" id="info-title" data-es="Encuéntranos" data-en="Find Us">Encuéntranos</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <h4 data-es="Horarios" data-en="Hours">Horarios</h4>
+                    <p id="info-hours" style="color: var(--color-text-light); font-weight: 600;"></p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    </div>
+                    <h4 data-es="Teléfono" data-en="Phone">Teléfono</h4>
+                    <p id="info-phone" style="color: var(--color-text-light); font-weight: 600;"></p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    </div>
+                    <h4 data-es="Dirección" data-en="Address">Dirección</h4>
+                    <p id="info-address" style="color: var(--color-text-light); font-weight: 600;"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="sarape-border" style="position: absolute; top: 0; left: 0;"></div>
+        <div class="container" style="margin-top: 10px;">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">EL COMPA</div>
+                    <p data-es="Auténtica comida mexicana preparada con ingredientes frescos y recetas tradicionales para que celebres en cada mordida." data-en="Authentic Mexican food prepared with fresh ingredients and traditional recipes so you can celebrate in every bite.">Auténtica comida mexicana preparada con ingredientes frescos y recetas tradicionales para que celebres en cada mordida.</p>
+                    <div id="social-icons" class="social-links"></div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title" data-es="Contacto" data-en="Contact Us">Contacto</h4>
+                    <p id="footer-address"></p>
+                    <p id="footer-phone"></p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-title" data-es="Horarios" data-en="Hours">Horarios</h4>
+                    <p id="footer-hours"></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2015 - <span id="copyright-year"></span> Powered by <a href="https://menutech.xyz" target="_blank">Menutech</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        const optimizeCloudinaryUrl = (url, options = {}) => {
+            if (!url || typeof url !== 'string' || !url.includes('res.cloudinary.com')) return url;
+            const [baseUrl, hash] = url.split('#');
+            if (!baseUrl.includes('/upload/')) return url;
+            const parts = baseUrl.split('/upload/');
+            
+            let pathSegments = parts[1].split('/');
+            if (pathSegments.length > 1) {
+                const firstSegment = pathSegments[0];
+                if (/^v\d+$/.test(firstSegment) === false && (firstSegment.includes('_') || firstSegment.includes(','))) {
+                    pathSegments.shift();
+                }
+            }
+            const cleanPath = pathSegments.join('/');
+            let transformations = ['f_auto', 'q_auto:eco', 'dpr_auto'];
+            if (options.width) transformations.push(`w_${options.width}`);
+            if (options.height) transformations.push(`h_${options.height}`);
+            if (options.crop) transformations.push(`c_${options.crop}`);
+            
+            return `${parts[0]}/upload/${transformations.join(',')}/${cleanPath}${hash ? '#'+hash : ''}`;
+        };
+
+        const SOCIAL_ICONS = {
+            instagram: `<svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25 1.25 1.25 0 0 1-1.25 1.25 1.25 1.25 0 0 1-1.25-1.25c0-.69.56-1.25 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>`,
+            facebook: `<svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>`,
+            tiktok: `<svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91.04.15 1.53.85 3.03 1.95 4.09 1.07 1.03 2.55 1.63 4.08 1.67v3.91c-1.61-.04-3.18-.5-4.52-1.33-.2-.12-.4-.26-.59-.42v5.86c-.02 2.66-1.57 5.09-3.99 6.27-2.42 1.18-5.32.76-7.3-1.07-1.99-1.84-2.76-4.71-1.93-7.25.82-2.54 3.06-4.36 5.71-4.63V11c-1.39.09-2.71.69-3.75 1.68-1.05.99-1.66 2.38-1.72 3.82-.06 1.44.43 2.86 1.36 3.96.93 1.1 2.29 1.76 3.75 1.83 1.46.06 2.89-.47 3.94-1.46 1.06-.99 1.68-2.39 1.73-3.86V.02z"/></svg>`
+        };
+
+        let currentLang = 'es';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-es]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+
+            const esBtn = document.getElementById('lang-es');
+            const enBtn = document.getElementById('lang-en');
+            if (lang === 'es') {
+                esBtn.classList.add('active'); enBtn.classList.remove('active');
+            } else {
+                enBtn.classList.add('active'); esBtn.classList.remove('active');
+            }
+
+            if (window.MENU_TECH_STATE) {
+                const pSource = lang === 'es' ? window.MENU_TECH_STATE.paragraphs : window.MENU_TECH_STATE.paragraphs_en;
+                if (pSource && pSource.about) {
+                    const segments = pSource.about.split('\n\n');
+                    const ids = ['about-p1', 'about-p2', 'about-p3'];
+                    ids.forEach((id, i) => {
+                        const el = document.getElementById(id);
+                        if(el) {
+                            el.textContent = segments[i] || '';
+                            el.style.display = segments[i] ? 'block' : 'none';
+                        }
+                    });
+                }
+                
+                const tSource = lang === 'es' ? window.MENU_TECH_STATE.titles : window.MENU_TECH_STATE.titles_en;
+                if (tSource) {
+                    Object.keys(tSource).forEach(key => {
+                        const el = document.getElementById(key);
+                        if(el) el.textContent = tSource[key];
+                    });
+                }
+            }
+        }
+
+        function initData(data) {
+            if (!data) return;
+
+            if (data.aboutImg1) document.getElementById('about-img-1').src = optimizeCloudinaryUrl(data.aboutImg1, { width: 600 });
+            if (data.aboutImg2) document.getElementById('about-img-2').src = optimizeCloudinaryUrl(data.aboutImg2, { width: 600 });
+
+            if (data.gallery) {
+                const gc = document.getElementById('gallery-container');
+                gc.innerHTML = data.gallery.map(img => `
+                    <img src="${optimizeCloudinaryUrl(img, { width: 400, height: 400, crop: 'fill' })}" class="gallery-img" loading="lazy" alt="Mexican Food">
+                `).join('');
+            }
+
+            if (data.info) {
+                const infoFormat = (data.info.hours || '').replace(/\n/g, '<br>');
+                document.getElementById('info-hours').innerHTML = infoFormat;
+                document.getElementById('footer-hours').innerHTML = infoFormat;
+                document.getElementById('info-phone').textContent = data.info.phone;
+                document.getElementById('footer-phone').textContent = data.info.phone;
+                document.getElementById('info-address').textContent = data.info.address;
+                document.getElementById('footer-address').textContent = data.info.address;
+            }
+
+            if (data.socials) {
+                document.getElementById('social-icons').innerHTML = data.socials.map(s => `
+                    <a href="${s.url}" target="_blank" aria-label="${s.platform}">
+                        ${SOCIAL_ICONS[s.platform] || ''}
+                    </a>
+                `).join('');
+            }
+
+            applyLanguage(currentLang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initData(window.MENU_TECH_STATE);
+            document.getElementById('lang-es').addEventListener('click', () => applyLanguage('es'));
+            document.getElementById('lang-en').addEventListener('click', () => applyLanguage('en'));
+
+            // Mobile menu
+            const toggler = document.getElementById('navbar-toggler');
+            const menu = document.getElementById('nav-menu');
+            toggler.addEventListener('click', () => menu.classList.toggle('active'));
+
+            // Fade in intersection observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('section').forEach(sec => {
+                sec.style.opacity = '0';
+                sec.style.transform = 'translateY(40px)';
+                sec.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(sec);
+            });
+        });
+    </script>
+</body>
+</html>
